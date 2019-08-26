@@ -156,9 +156,9 @@ public class DBUpgradeServiceImpl implements DBUpgradeService {
         return resourceLoader.getResource(path);
     }
     private String getUpgradeResourcePath(String version) {
-        return String.format("classpath:db/cloud.frontend.app.version-%s-upgrade.sql", version);
+        return String.format("classpath:db/upgrade-%s.sql", version);
     }
     private String getInitResourcePath() {
-        return "classpath:db/cloud.frontend.app.init.sql";
+        return "classpath:db/init.sql";
     }
 }

@@ -166,7 +166,7 @@ public class ESUpgradeServiceImpl implements ESUpgradeService {
         return resourceLoader.getResource(path);
     }
     private String getUpgradeResourcePath(String version) {
-        return String.format("classpath:es/cloud.frontend.app.version-%s-upgrade.yml", version);
+        return String.format("classpath:es/upgrade-%s.yml", version);
     }
     private Connection getConnection() {
         try {
