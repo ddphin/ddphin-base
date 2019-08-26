@@ -1,7 +1,6 @@
 package com.ddphin.base.common.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,9 +8,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-public class ResponseUtil {	
-	private final static Logger logger = LoggerFactory.getLogger(ResponseUtil.class);
-	
+@Slf4j
+public class ResponseUtil {
 	public static void writer(HttpServletResponse response, String message) {
 		OutputStream os = null;
 		try {	
@@ -50,7 +48,7 @@ public class ResponseUtil {
 			writer.flush();
 			success = true;
 		} catch (IOException e) {
-			logger.error("writeResult", e);
+			log.error("writeResult", e);
 		} finally {
 			if (null != writer) {
 				writer.close();

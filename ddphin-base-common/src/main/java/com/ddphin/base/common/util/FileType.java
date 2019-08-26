@@ -2,7 +2,6 @@ package com.ddphin.base.common.util;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class FileType {

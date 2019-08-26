@@ -37,10 +37,10 @@ public class AESCryptor {
             Key sKeySpec = new SecretKeySpec(keyByte, ALGORITHM_AES);
 
             if (null == ivByte) {
-                cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(ivByte));// 初始化
+                cipher.init(Cipher.DECRYPT_MODE, sKeySpec);// 初始化
             }
             else {
-                cipher.init(Cipher.DECRYPT_MODE, sKeySpec);// 初始化
+                cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(ivByte));// 初始化
             }
             return cipher.doFinal(content);
         } catch (Exception e) {

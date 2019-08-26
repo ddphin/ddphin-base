@@ -3,9 +3,6 @@ package com.ddphin.base.common.util;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,10 +53,10 @@ public class RequestUtil {
 		return value;
 	}
 	public static String getHeader(NativeWebRequest request, String name) {
-		String value = StringUtils.EMPTY;
+		String value = "";
 		try {			
 			value = request.getHeader(name);
-			if (StringUtils.isNotBlank(value)) {
+			if (null != value && !value.trim().isEmpty()) {
 				value = URLDecoder.decode(value, StandardCharsets.UTF_8.name());
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -74,7 +71,7 @@ public class RequestUtil {
 	}
 	public static String getIp(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
-		if(StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)){
+		if(null != ip && !ip.trim().isEmpty() && !"unKnown".equalsIgnoreCase(ip)){
 			//多次反向代理后会有多个ip值，第一个ip才是真实ip
 			int index = ip.indexOf(",");
 			if(index != -1){
@@ -84,7 +81,7 @@ public class RequestUtil {
 			}
 		}
 		ip = request.getHeader("X-Real-IP");
-		if(StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)){
+		if(null != ip && !ip.trim().isEmpty() && !"unKnown".equalsIgnoreCase(ip)){
 			return ip;
 		}
 		return request.getRemoteAddr();

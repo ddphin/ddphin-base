@@ -30,7 +30,7 @@
     <parent>
         <groupId>com.github.ddphin</groupId>
         <artifactId>ddphin-base</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
 
     
@@ -71,11 +71,6 @@
         <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
         </dependency>
     </dependencies>
 
