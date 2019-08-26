@@ -1,14 +1,14 @@
 package com.ddphin.base.common.util;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.util.encoders.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.*;
-import java.util.Objects;
+import java.security.AlgorithmParameters;
+import java.security.Key;
+import java.security.Security;
 
 public class AESCryptor {
 	
@@ -20,22 +20,9 @@ public class AESCryptor {
     public static final String PROVIDER_BC= "BC";
     public static final String TRANSFORMATION_AES_CBC_PKCS7PADDING = "AES/CBC/PKCS7Padding";
 
-    public String decrypt(String content, String key, String iv) {
+    public String decryptToString(byte[] content, byte[] keyByte, byte[] ivByte) {
         return new String(
-        		this.decrypt(
-        				Base64.decode(content),
-        				Base64.decode(key),  
-        				Base64.decode(iv)
-        				),
-                StandardCharsets.UTF_8);
-    }
-    public String decrypt(String content, String key) {
-        return new String(
-                this.decrypt(
-                        Base64.decode(content),
-                        Objects.requireNonNull(MD5Encoder.encode(key, false)).getBytes()
-                ),
-                StandardCharsets.UTF_8);
+        		this.decrypt(content, keyByte, ivByte ), StandardCharsets.UTF_8);
     }
 
     /**
@@ -49,20 +36,12 @@ public class AESCryptor {
             Cipher cipher = Cipher.getInstance(TRANSFORMATION_AES_CBC_PKCS7PADDING, PROVIDER_BC);
             Key sKeySpec = new SecretKeySpec(keyByte, ALGORITHM_AES);
 
-            cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(ivByte));// 初始化
-            return cipher.doFinal(content);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public byte[] decrypt(byte[] content, byte[] keyByte) {
-        initialize();
-        try {
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION_AES_CBC_PKCS7PADDING, PROVIDER_BC);
-            Key sKeySpec = new SecretKeySpec(keyByte, ALGORITHM_AES);
-
-            cipher.init(Cipher.DECRYPT_MODE, sKeySpec);// 初始化
+            if (null == ivByte) {
+                cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(ivByte));// 初始化
+            }
+            else {
+                cipher.init(Cipher.DECRYPT_MODE, sKeySpec);// 初始化
+            }
             return cipher.doFinal(content);
         } catch (Exception e) {
             e.printStackTrace();
