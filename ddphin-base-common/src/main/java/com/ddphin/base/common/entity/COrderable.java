@@ -1,5 +1,7 @@
 package com.ddphin.base.common.entity;
 
+import org.springframework.core.annotation.Order;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,7 +14,8 @@ import java.util.stream.Collectors;
  * Author     ddphin
  * Version    V1.0
  */
-public class COrderable {
+public abstract class COrderable {
+    public ORDERS orders() { return ORDERS.build(ORDERS.create("", "")); }
 
     public static class ORDERS {
         public static class ORDER {
