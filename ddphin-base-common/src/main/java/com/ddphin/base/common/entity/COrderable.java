@@ -1,7 +1,5 @@
 package com.ddphin.base.common.entity;
 
-import org.springframework.core.annotation.Order;
-
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;

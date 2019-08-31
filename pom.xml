@@ -29,7 +29,7 @@
 
     <groupId>com.github.ddphin</groupId>
     <artifactId>ddphin-base</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <packaging>pom</packaging>
 
     <name>ddphin-base</name>
@@ -58,6 +58,7 @@
 
     <modules>
         <module>ddphin-base-common</module>
+        <module>ddphin-base-swagger</module>
         <module>ddphin-base-db</module>
         <module>ddphin-base-es</module>
         <module>ddphin-base-oss</module>
@@ -76,6 +77,8 @@
         <mysql.version>8.0.16</mysql.version>
         <mybatis-spring-boot.version>2.0.1</mybatis-spring-boot.version>
         <pagehelper-spring-boot.version>1.2.12</pagehelper-spring-boot.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger-bootstrap-ui.version>1.9.4</swagger-bootstrap-ui.version>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +86,11 @@
             <dependency>
                 <groupId>com.github.ddphin</groupId>
                 <artifactId>ddphin-base-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ddphin</groupId>
+                <artifactId>ddphin-base-swagger</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -185,6 +193,22 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-bootstrap-ui.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

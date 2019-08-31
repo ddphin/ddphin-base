@@ -1,18 +1,17 @@
 package com.ddphin.base.common.constant;
 
 public enum AppType {
-	H5(1000, "h5"),
+	H5(1000, "H5"),
 
-	APP(2000, "app"),
-	ANDROID(2100, "android"),
-	IOS(2200, "ios"),
+	ANDROID(2100, "Android"),
+	IOS(2200, "IOS"),
 
-	WX(3000, "srv"),
-	SRV(3100, "srv"),
-	SUB(3200, "sub"),
-	XCX(3300, "xcx"),
+	WX(3000, "微信"),
+	WX_SRV(3100, "微信服务号"),
+	WX_SUB(3200, "微信订阅号"),
+	WX_XCX(3300, "微信小程序"),
 
-	ALI(4000, "ali"),
+	ALI_PAY(4000, "支付宝"),
 			;
 
 	private Integer code;
