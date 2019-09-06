@@ -13,6 +13,7 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.ReindexRequest;
+import org.elasticsearch.script.Script;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -124,6 +125,9 @@ public class ESUpgradeServiceImpl implements ESUpgradeService {
                                 ReindexRequest request = new ReindexRequest();
                                 request.setSourceIndices((String) i.get("source").get("index"));
                                 request.setDestIndex((String) i.get("dest").get("index"));
+                                if (null != i.get("script").get("code")) {
+                                    request.setScript(new Script((String) i.get("script").get("code")));
+                                }
                                 BulkByScrollResponse response = esclient.reindex(request, RequestOptions.DEFAULT);
                                 if (!response.getBulkFailures().isEmpty()) {
                                     log.error("reindex:{}", response.toString());
