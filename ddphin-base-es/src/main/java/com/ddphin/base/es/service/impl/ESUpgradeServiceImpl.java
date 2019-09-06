@@ -72,7 +72,7 @@ public class ESUpgradeServiceImpl implements ESUpgradeService {
 
                         result = this.exec(upgrade);
                         runner.update(
-                                "update db_upgrade_log set `status` = ? where `version` = ?", result? 1 : 2, version);
+                                "update es_upgrade_log set `status` = ? where `version` = ?", result? 1 : 2, version);
                     }
                 } catch (SQLException e) {
                     log.error("error", e);
