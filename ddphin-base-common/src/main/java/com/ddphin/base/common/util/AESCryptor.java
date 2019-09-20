@@ -19,10 +19,15 @@ public class AESCryptor {
     public static final String ALGORITHM_AES = "AES";
     public static final String PROVIDER_BC= "BC";
     public static final String TRANSFORMATION_AES_CBC_PKCS7PADDING = "AES/CBC/PKCS7Padding";
+    public static final String TRANSFORMATION_AES_ECB_PKCS7PADDING = "AES/ECB/PKCS7Padding";
 
     public String decryptToString(byte[] content, byte[] keyByte, byte[] ivByte) {
         return new String(
-        		this.decrypt(content, keyByte, ivByte ), StandardCharsets.UTF_8);
+        		this.decrypt(content, keyByte, ivByte, TRANSFORMATION_AES_CBC_PKCS7PADDING), StandardCharsets.UTF_8);
+    }
+    public String decryptToString_ECB(byte[] content, byte[] keyByte, byte[] ivByte) {
+        return new String(
+                this.decrypt(content, keyByte, ivByte, TRANSFORMATION_AES_ECB_PKCS7PADDING), StandardCharsets.UTF_8);
     }
 
     /**
@@ -30,10 +35,10 @@ public class AESCryptor {
      * @param content 密文
      * @return 解密后的字符串
      */
-    public byte[] decrypt(byte[] content, byte[] keyByte, byte[] ivByte) {
+    public byte[] decrypt(byte[] content, byte[] keyByte, byte[] ivByte, String transformation) {
         initialize();
         try {
-            Cipher cipher = Cipher.getInstance(TRANSFORMATION_AES_CBC_PKCS7PADDING, PROVIDER_BC);
+            Cipher cipher = Cipher.getInstance(transformation, PROVIDER_BC);
             Key sKeySpec = new SecretKeySpec(keyByte, ALGORITHM_AES);
 
             if (null == ivByte) {
